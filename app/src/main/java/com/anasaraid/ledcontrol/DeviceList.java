@@ -30,6 +30,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 public class DeviceList extends AppCompatActivity {
     private BluetoothAdapter myBluetooth = null;
     private Set pairedDevices;
+    private ListView deviceList;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -59,7 +60,7 @@ public class DeviceList extends AppCompatActivity {
             }
             btnPaired.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
+                public void onClick(View v) {
                     pairedDevicesList();
                 }
             });
@@ -68,22 +69,28 @@ public class DeviceList extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-    private void pairedDevicesList(){
-        BluetoothDevice bt;
-        pairedDevices = myBluetooth.getBondedDevices();
+
+    private void pairedDevicesList() {
+        Set<BluetoothDevice> pairedDevices = myBluetooth.getBondedDevices();
         ArrayList list = new ArrayList();
-        if (pairedDevices.size() > 0){
-            for (bt : pairedDevices)
-            {
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice bt : pairedDevices) {
                 list.add(bt.getName() + "\n" + bt.getAddress());
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(getApplicationContext(), "No paired devices found", Toast.LENGTH_LONG).show();
         }
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+        deviceList.setAdapter(adapter);
+        deviceList.setOnItemClickListener(myListClickListener);
     }
 
+    private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
+    {
+        public void onItemClick(AdapterView av, View v, int arg2, long arg3){
+            
+        }
+    };
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
