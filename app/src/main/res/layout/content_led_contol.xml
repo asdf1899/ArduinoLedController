@@ -12,4 +12,64 @@
     tools:context="com.anasaraid.ledcontrol.ledContol"
     tools:showIn="@layout/activity_led_contol">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/edtTitle2"
+        android:id="@+id/edtTitle2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn On"
+        android:id="@+id/btnTurnOn"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/edtTitle2"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn Off"
+        android:id="@+id/btnTurnOff"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/btnTurnOn"
+        android:layout_alignLeft="@+id/btnTurnOn"
+        android:layout_alignStart="@+id/btnTurnOn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disconnect"
+        android:id="@+id/btnDisconnect"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="68dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Brightness"
+        android:id="@+id/textView"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/btnTurnOff"
+        android:layout_alignLeft="@+id/btnTurnOff"
+        android:layout_alignStart="@+id/btnTurnOff" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/edtTitle2"
+        android:layout_alignStart="@+id/edtTitle2"
+        android:layout_marginTop="34dp"
+        android:layout_alignRight="@+id/edtTitle2"
+        android:layout_alignEnd="@+id/edtTitle2" />
 </RelativeLayout>

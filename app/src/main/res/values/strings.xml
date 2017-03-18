@@ -4,4 +4,5 @@
     <string name="edtTitle">ARDUINO LED CONTROLLER</string>
     <string name="edtPairedDevices">Show paired devices</string>
     <string name="title_activity_led_contol">ledContol</string>
+    <string name="edtTitle2">ARDUINO LED CONTROLLER</string>
 </resources>
