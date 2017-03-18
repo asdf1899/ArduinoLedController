@@ -5,4 +5,8 @@
     <string name="edtPairedDevices">Show paired devices</string>
     <string name="title_activity_led_contol">ledContol</string>
     <string name="edtTitle2">ARDUINO LED CONTROLLER</string>
+    <string name="btnTurnOn">Turn On</string>
+    <string name="btnTurnOff">TURN OFF</string>
+    <string name="btnDisconnect">Disconnect</string>
+    <string name="lblBrightness">Brightness</string>
 </resources>

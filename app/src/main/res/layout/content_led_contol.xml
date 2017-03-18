@@ -25,7 +25,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn On"
+        android:text="@string/btnTurnOn"
         android:id="@+id/btnTurnOn"
         android:layout_marginTop="68dp"
         android:layout_below="@+id/edtTitle2"
@@ -34,7 +34,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Turn Off"
+        android:text="@string/btnTurnOff"
         android:id="@+id/btnTurnOff"
         android:layout_marginTop="37dp"
         android:layout_below="@+id/btnTurnOn"
@@ -44,7 +44,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Disconnect"
+        android:text="@string/btnDisconnect"
         android:id="@+id/btnDisconnect"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -55,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Brightness"
-        android:id="@+id/textView"
+        android:text="@string/lblBrightness"
+        android:id="@+id/lblBrightness"
         android:layout_marginTop="68dp"
         android:layout_below="@+id/btnTurnOff"
         android:layout_alignLeft="@+id/btnTurnOff"
@@ -66,10 +66,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/lblBrightness"
         android:layout_alignLeft="@+id/edtTitle2"
         android:layout_alignStart="@+id/edtTitle2"
         android:layout_marginTop="34dp"
         android:layout_alignRight="@+id/edtTitle2"
-        android:layout_alignEnd="@+id/edtTitle2" />
+        android:layout_alignEnd="@+id/edtTitle2"
+        android:max="255"
+        android:progress="5"
+        android:indeterminate="false" />
 </RelativeLayout>
