@@ -38,7 +38,11 @@ public class ledContol extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent newInt = getIntent();
         address = newInt.getStringExtra(DeviceList.EXTRA_ADDRESS);
-        
+        setContentView(R.layout.activity_led_contol);
+        btnOn = (Button)findViewById(R.id.btnTurnOn);
+        btnOff = (Button)findViewById(R.id.btnTurnOff);
+        btnDis = (Button)findViewById(R.id.btnDisconnect);
+        brightness = (SeekBar)findViewById(R.id.seekBar);
     }
 
 }
