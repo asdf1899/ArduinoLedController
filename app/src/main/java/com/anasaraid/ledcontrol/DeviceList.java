@@ -8,8 +8,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ListView;
+import java.util.Set;
+import java.util.ArrayList;
+import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.content.Intent;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+
 
 public class DeviceList extends AppCompatActivity {
+    private BluetoothAdapter myBluetooth = null;
+    private Set pairedDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,15 +32,11 @@ public class DeviceList extends AppCompatActivity {
         setContentView(R.layout.activity_device_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Button btnPaired;
+        ListView deviceList;
+        btnPaired = (Button)findViewById(R.id.btnPairedDevies);
+        deviceList = (ListView)findViewById(R.id.lstPairedDevices);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override

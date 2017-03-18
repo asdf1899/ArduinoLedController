@@ -40,5 +40,6 @@
         android:layout_alignLeft="@+id/edtTitle"
         android:layout_alignStart="@+id/edtTitle"
         android:layout_alignRight="@+id/edtTitle"
-        android:layout_alignEnd="@+id/edtTitle" />
+        android:layout_alignEnd="@+id/edtTitle"
+        android:choiceMode="singleChoice" />
 </RelativeLayout>
