@@ -1,5 +1,6 @@
 package com.anasaraid.ledcontrol;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +32,7 @@ public class DeviceList extends AppCompatActivity {
     private BluetoothAdapter myBluetooth = null;
     private Set pairedDevices;
     private ListView deviceList;
+    public static String EXTRA_ADDRESS = "device_address";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -88,7 +90,11 @@ public class DeviceList extends AppCompatActivity {
     private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
     {
         public void onItemClick(AdapterView av, View v, int arg2, long arg3){
-            
+            String info = ((TextView) v).getText().toString();
+            String address = info.substring(info.length() - 17);
+            Intent i = new Intent(DeviceList.this, ledControl.class);
+            i.putExtra(EXTRA_ADDRESS, address);
+            startActivity(i);
         }
     };
     @Override
