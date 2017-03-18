@@ -1,4 +1,5 @@
 package com.anasaraid.ledcontrol;
+import com.anasaraid.ledcontrol.ledContol;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -87,12 +88,12 @@ public class DeviceList extends AppCompatActivity {
         deviceList.setOnItemClickListener(myListClickListener);
     }
 
-    private AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
+    AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
     {
         public void onItemClick(AdapterView av, View v, int arg2, long arg3){
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
-            Intent i = new Intent(DeviceList.this, ledControl.class);
+            Intent i = new Intent(v.getContext(), ledContol.class);
             i.putExtra(EXTRA_ADDRESS, address);
             startActivity(i);
         }
