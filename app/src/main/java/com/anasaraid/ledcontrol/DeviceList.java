@@ -1,6 +1,7 @@
 package com.anasaraid.ledcontrol;
 
 import android.app.AlertDialog;
+import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,7 @@ public class DeviceList extends AppCompatActivity {
     }
 
     private void pairedDevicesList() {
-        Set<BluetoothDevice> pairedDevices = myBluetooth.getBondedDevices();
+        final Set<BluetoothDevice> pairedDevices = myBluetooth.getBondedDevices();
         ArrayList list = new ArrayList();
         for (BluetoothDevice bt : pairedDevices) {
             list.add(bt.getName()+ "\n" + bt.getAddress());
