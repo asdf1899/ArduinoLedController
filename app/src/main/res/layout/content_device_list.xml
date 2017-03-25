@@ -19,14 +19,14 @@
         android:id="@+id/edtTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/edtPairedDevices"
         android:id="@+id/btnPairedDevies"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="38dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -34,12 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lstPairedDevices"
+        android:choiceMode="singleChoice"
         android:layout_below="@+id/edtTitle"
-        android:layout_marginTop="47dp"
-        android:layout_above="@+id/btnPairedDevies"
         android:layout_alignLeft="@+id/edtTitle"
         android:layout_alignStart="@+id/edtTitle"
-        android:layout_alignRight="@+id/edtTitle"
-        android:layout_alignEnd="@+id/edtTitle"
-        android:choiceMode="singleChoice" />
+        android:layout_above="@+id/btnPairedDevies" />
 </RelativeLayout>

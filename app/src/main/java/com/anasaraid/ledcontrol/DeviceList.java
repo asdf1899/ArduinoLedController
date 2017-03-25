@@ -1,16 +1,12 @@
 package com.anasaraid.ledcontrol;
-import com.anasaraid.ledcontrol.ledContol;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import java.util.Set;
@@ -24,21 +20,16 @@ import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 
 public class DeviceList extends AppCompatActivity {
     private BluetoothAdapter myBluetooth = null;
     private Set pairedDevices;
     private ListView deviceList;
     public static String EXTRA_ADDRESS = "device_address";
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +37,7 @@ public class DeviceList extends AppCompatActivity {
         setContentView(R.layout.activity_device_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Button btnPaired;
-        ListView deviceList;
-        btnPaired = (Button) findViewById(R.id.btnPairedDevies);
+        Button btnPaired = (Button) findViewById(R.id.btnPairedDevies);
         deviceList = (ListView) findViewById(R.id.lstPairedDevices);
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
         if (myBluetooth == null) {
@@ -56,7 +45,7 @@ public class DeviceList extends AppCompatActivity {
             finish();
         } else {
             if (myBluetooth.isEnabled()) {
-
+                Toast.makeText(getApplicationContext(), "Bluetooth already on", Toast.LENGTH_LONG).show();
             } else {
                 Intent turnBTOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(turnBTOn, 1);
@@ -68,29 +57,22 @@ public class DeviceList extends AppCompatActivity {
                 }
             });
         }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void pairedDevicesList() {
         Set<BluetoothDevice> pairedDevices = myBluetooth.getBondedDevices();
         ArrayList list = new ArrayList();
-        if (pairedDevices.size() > 0) {
-            for (BluetoothDevice bt : pairedDevices) {
-                list.add(bt.getName() + "\n" + bt.getAddress());
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "No paired devices found", Toast.LENGTH_LONG).show();
+        for (BluetoothDevice bt : pairedDevices) {
+            list.add(bt.getName());
         }
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+        Toast.makeText(getApplicationContext(), "Showing paired devices", Toast.LENGTH_LONG).show();
+        final ArrayAdapter adapter = new ArrayAdapter(DeviceList.this, android.R.layout.simple_list_item_1, list);
         deviceList.setAdapter(adapter);
-        deviceList.setOnItemClickListener(myListClickListener);
+        //deviceList.setOnItemClickListener(myListClickListener);
     }
 
-    AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener()
-    {
-        public void onItemClick(AdapterView av, View v, int arg2, long arg3){
+    AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView av, View v, int arg2, long arg3) {
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
             Intent i = new Intent(v.getContext(), ledContol.class);
@@ -98,65 +80,17 @@ public class DeviceList extends AppCompatActivity {
             startActivity(i);
         }
     };
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_device_list, menu);
-        return true;
-    }
+    private void showAlert(String message){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage(message);
+        alert.setTitle("Info");
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DeviceList Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.anasaraid.ledcontrol/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "DeviceList Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.anasaraid.ledcontrol/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+            }
+        });
+        alert.setCancelable(true);
+        alert.create().show();
     }
 }
