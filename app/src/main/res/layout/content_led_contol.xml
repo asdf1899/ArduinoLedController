@@ -12,23 +12,12 @@
     tools:context="com.anasaraid.ledcontrol.ledContol"
     tools:showIn="@layout/activity_led_contol">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/edtTitle2"
-        android:id="@+id/edtTitle2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="25sp" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnTurnOn"
         android:id="@+id/btnTurnOn"
         android:layout_marginTop="68dp"
-        android:layout_below="@+id/edtTitle2"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -67,12 +56,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
         android:layout_below="@+id/lblBrightness"
-        android:layout_alignLeft="@+id/edtTitle2"
-        android:layout_alignStart="@+id/edtTitle2"
         android:layout_marginTop="34dp"
-        android:layout_alignRight="@+id/edtTitle2"
-        android:layout_alignEnd="@+id/edtTitle2"
         android:max="255"
         android:progress="5"
-        android:indeterminate="false" />
+        android:indeterminate="false"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
