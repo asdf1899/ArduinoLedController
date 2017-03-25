@@ -20,7 +20,7 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.util.UUID;
 
-public class ledContol extends AppCompatActivity {
+public class LedContol extends AppCompatActivity {
     Button btnOn, btnOff, btnDis;
     SeekBar brightness;
     String address = null;

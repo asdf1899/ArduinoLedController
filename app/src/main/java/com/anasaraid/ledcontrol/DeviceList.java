@@ -63,23 +63,36 @@ public class DeviceList extends AppCompatActivity {
         Set<BluetoothDevice> pairedDevices = myBluetooth.getBondedDevices();
         ArrayList list = new ArrayList();
         for (BluetoothDevice bt : pairedDevices) {
-            list.add(bt.getName());
+            list.add(bt.getName()+ "\n" + bt.getAddress());
         }
         Toast.makeText(getApplicationContext(), "Showing paired devices", Toast.LENGTH_LONG).show();
         final ArrayAdapter adapter = new ArrayAdapter(DeviceList.this, android.R.layout.simple_list_item_1, list);
         deviceList.setAdapter(adapter);
+        deviceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String info = ((TextView) view).getText().toString();
+                String address = info.substring(info.length() - 17);
+                Intent i = new Intent(DeviceList.this, LedContol.class);
+                i.putExtra(EXTRA_ADDRESS, address);
+                startActivity(i);
+            }
+        });
+        /*
         //deviceList.setOnItemClickListener(myListClickListener);
+        AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView av, View v, int arg2, long arg3) {
+                String info = ((TextView) v).getText().toString();
+                String address = info.substring(info.length() - 17);
+                Intent i = new Intent(v.getContext(), ledContol.class);
+                i.putExtra(EXTRA_ADDRESS, address);
+                startActivity(i);
+            }
+        };
+         */
     }
 
-    AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView av, View v, int arg2, long arg3) {
-            String info = ((TextView) v).getText().toString();
-            String address = info.substring(info.length() - 17);
-            Intent i = new Intent(v.getContext(), ledContol.class);
-            i.putExtra(EXTRA_ADDRESS, address);
-            startActivity(i);
-        }
-    };
+
     private void showAlert(String message){
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage(message);

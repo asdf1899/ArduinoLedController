@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".ledContol"
+            android:name=".LedContol"
             android:label="@string/title_activity_led_contol"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
