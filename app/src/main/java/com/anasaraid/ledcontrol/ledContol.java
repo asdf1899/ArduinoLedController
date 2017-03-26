@@ -59,14 +59,15 @@ public class LedContol extends AppCompatActivity {
              if (btSocket == null){
                  myBluetooth = BluetoothAdapter.getDefaultAdapter();
                  BluetoothDevice disp = myBluetooth.getRemoteDevice(address);
-                 btSocket = disp.createInsecureRfcommSocketToServiceRecord(myUUIID);
-                 BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
+                 btSocket = disp.createRfcommSocketToServiceRecord(myUUIID);
+                 //BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                  btSocket.connect();
+                 showAlert("INFO", btSocket.toString(), false);
              }
         }catch (IOException e){
             connected = false;
-            showAlert("ERROR", e.getMessage(), true);
-        }/*
+            showAlert("ERROR", "Device not available", true);
+        }
         btnOn.setOnClickListener(new View.OnClickListener(){
             @Override
         public void onClick(View v){
@@ -79,18 +80,20 @@ public class LedContol extends AppCompatActivity {
                 turnOffLed();
             }
         });
+
         btnDis.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 disconnect();
             }
-        });*/
+        });
 
     }
     private void disconnect(){
         if(btSocket != null){
             try{
                btSocket.close();
+                finish();
             }catch(IOException e){
                 showAlert("ERROR", e.getMessage().toString(), true);
             }
@@ -100,6 +103,7 @@ public class LedContol extends AppCompatActivity {
         if(btSocket != null){
             try{
                 btSocket.getOutputStream().write("H".toString().getBytes());
+                Toast.makeText(getApplicationContext(), "Turn on", Toast.LENGTH_LONG).show();
             }catch(IOException e){
                 showAlert("ERROR", e.getMessage().toString(), true);
             }
@@ -109,6 +113,7 @@ public class LedContol extends AppCompatActivity {
         if(btSocket != null){
             try{
                 btSocket.getOutputStream().write("L".toString().getBytes());
+                Toast.makeText(getApplicationContext(), "Turn off", Toast.LENGTH_LONG).show();
             }catch(IOException e){
                 showAlert("ERROR", e.getMessage().toString(), true);
             }
@@ -140,9 +145,5 @@ public class LedContol extends AppCompatActivity {
         });
         alert.setCancelable(true);
         alert.create().show();
-    }
-    private void diconnect(){
-        //.disable();
-        Toast.makeText(getApplicationContext(),"Turned off" ,Toast.LENGTH_LONG).show();
     }
 }
