@@ -54,18 +54,15 @@ public class LedContol extends AppCompatActivity {
         btnOff = (Button)findViewById(R.id.btnTurnOff);
         btnDis = (Button)findViewById(R.id.btnDisconnect);
         brightness = (SeekBar)findViewById(R.id.seekBar);
-        boolean connected = false;
         try{
              if (btSocket == null){
                  myBluetooth = BluetoothAdapter.getDefaultAdapter();
                  BluetoothDevice disp = myBluetooth.getRemoteDevice(address);
-                 btSocket = disp.createRfcommSocketToServiceRecord(myUUIID);
+                 btSocket = disp.createInsecureRfcommSocketToServiceRecord(myUUIID);
                  //BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
                  btSocket.connect();
-                 showAlert("INFO", btSocket.toString(), false);
              }
         }catch (IOException e){
-            connected = false;
             showAlert("ERROR", "Device not available", true);
         }
         btnOn.setOnClickListener(new View.OnClickListener(){
@@ -100,23 +97,19 @@ public class LedContol extends AppCompatActivity {
         }
     }
     private void turnOnLed(){
-        if(btSocket != null){
-            try{
-                btSocket.getOutputStream().write("H".toString().getBytes());
-                Toast.makeText(getApplicationContext(), "Turn on", Toast.LENGTH_LONG).show();
-            }catch(IOException e){
-                showAlert("ERROR", e.getMessage().toString(), true);
-            }
+        try{
+            btSocket.getOutputStream().write("H".getBytes());
+            Toast.makeText(getApplicationContext(), "Turn on", Toast.LENGTH_LONG).show();
+        }catch(IOException e){
+            showAlert("ERROR", e.getMessage().toString(), true);
         }
     }
     private void turnOffLed(){
-        if(btSocket != null){
-            try{
-                btSocket.getOutputStream().write("L".toString().getBytes());
-                Toast.makeText(getApplicationContext(), "Turn off", Toast.LENGTH_LONG).show();
-            }catch(IOException e){
-                showAlert("ERROR", e.getMessage().toString(), true);
-            }
+        try{
+            btSocket.getOutputStream().write("L".getBytes());
+            Toast.makeText(getApplicationContext(), "Turn off", Toast.LENGTH_LONG).show();
+        }catch(IOException e){
+            showAlert("ERROR", e.getMessage().toString(), true);
         }
     }
     private void checkBTState() {
