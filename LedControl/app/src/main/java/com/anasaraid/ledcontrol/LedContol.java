@@ -27,15 +27,10 @@ import android.widget.Toast;
 
 public class LedContol extends AppCompatActivity {
     Button btnOn, btnOff, btnDis;
-    SeekBar brightness;
     BluetoothAdapter myBluetooth = null;
-    Handler bluetoothIn;
-    final int handlerState = 0;        				 //used to identify handler message
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
-    private StringBuilder recDataString = new StringBuilder();
 
-    //private ConnectedThread mConnectedThread;
     public static final UUID myUUIID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static String address;
 
@@ -53,7 +48,6 @@ public class LedContol extends AppCompatActivity {
         btnOn = (Button)findViewById(R.id.btnTurnOn);
         btnOff = (Button)findViewById(R.id.btnTurnOff);
         btnDis = (Button)findViewById(R.id.btnDisconnect);
-        brightness = (SeekBar)findViewById(R.id.seekBar);
         try{
              if (btSocket == null){
                  myBluetooth = BluetoothAdapter.getDefaultAdapter();
@@ -92,7 +86,7 @@ public class LedContol extends AppCompatActivity {
                btSocket.close();
                 finish();
             }catch(IOException e){
-                showAlert("ERROR", e.getMessage().toString(), true);
+                showAlert("ERROR", e.getMessage(), true);
             }
         }
     }
@@ -101,7 +95,7 @@ public class LedContol extends AppCompatActivity {
             btSocket.getOutputStream().write("H".getBytes());
             Toast.makeText(getApplicationContext(), "Turn on", Toast.LENGTH_LONG).show();
         }catch(IOException e){
-            showAlert("ERROR", e.getMessage().toString(), true);
+            showAlert("ERROR", e.getMessage(), true);
         }
     }
     private void turnOffLed(){
@@ -109,7 +103,7 @@ public class LedContol extends AppCompatActivity {
             btSocket.getOutputStream().write("L".getBytes());
             Toast.makeText(getApplicationContext(), "Turn off", Toast.LENGTH_LONG).show();
         }catch(IOException e){
-            showAlert("ERROR", e.getMessage().toString(), true);
+            showAlert("ERROR", e.getMessage(), true);
         }
     }
     private void checkBTState() {

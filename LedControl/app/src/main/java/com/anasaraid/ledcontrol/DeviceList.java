@@ -79,18 +79,6 @@ public class DeviceList extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        /*
-        //deviceList.setOnItemClickListener(myListClickListener);
-        AdapterView.OnItemClickListener myListClickListener = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView av, View v, int arg2, long arg3) {
-                String info = ((TextView) v).getText().toString();
-                String address = info.substring(info.length() - 17);
-                Intent i = new Intent(v.getContext(), ledContol.class);
-                i.putExtra(EXTRA_ADDRESS, address);
-                startActivity(i);
-            }
-        };
-         */
     }
 
 

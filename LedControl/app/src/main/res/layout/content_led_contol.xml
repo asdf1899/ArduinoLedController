@@ -18,19 +18,19 @@
         android:layout_height="wrap_content"
         android:text="@string/btnTurnOn"
         android:id="@+id/btnTurnOn"
-        android:layout_marginTop="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/btnTurnOff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="83dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnTurnOff"
         android:id="@+id/btnTurnOff"
-        android:layout_alignTop="@+id/btnTurnOn"
-        android:layout_alignRight="@+id/btnDisconnect"
-        android:layout_alignEnd="@+id/btnDisconnect" />
+        android:layout_above="@+id/btnDisconnect"
+        android:layout_alignLeft="@+id/btnTurnOn"
+        android:layout_alignStart="@+id/btnTurnOn"
+        android:layout_marginBottom="83dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,22 +49,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/lblBrightness"
-        android:id="@+id/lblBrightness"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Led Controller"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
 
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:max="255"
-        android:progress="5"
-        android:indeterminate="false"
-        android:layout_below="@+id/lblBrightness"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnTurnOff"
-        android:layout_alignEnd="@+id/btnTurnOff" />
 </RelativeLayout>

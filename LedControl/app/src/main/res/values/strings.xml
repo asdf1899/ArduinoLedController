@@ -6,5 +6,4 @@
     <string name="btnTurnOn">Turn On</string>
     <string name="btnTurnOff">TURN OFF</string>
     <string name="btnDisconnect">Disconnect</string>
-    <string name="lblBrightness">Brightness</string>
 </resources>
